@@ -2,14 +2,17 @@
 
 class Game {
   // Variables
-  int score; // total score to be displayed
+  int currentScore, highScore; // score counter
   PImage imgTitle, imgLevel, imgEnd; // background images
   boolean isTitle, isLevel, isEnd; // screen type
-  String difficulty;
+  String difficulty; // "EASY" or "HARD"
+  Sushi[] sushis; // sushi collection
+  Bomb[] bombs; // bomb collection
   
   // Constructor
   Game() {
-    score = 0;
+    currentScore = 0;
+    highScore = 0;
     isTitle = true;
     isLevel = false;
     isEnd = false;
@@ -17,7 +20,15 @@ class Game {
     imgLevel = loadImage("bg_level.png");
     imgEnd = loadImage("bg_end.png");
     difficulty = "EASY";
-    
+    sushis = new Sushi[5];
+    bombs = new Bomb[2];
+
+    for (int i = 0; i < sushis.length; i++) {
+      sushis[i] = new Sushi();
+    }
+    for (int i = 0; i < bombs.length; i++) {
+      bombs[i] = new Bomb();
+    }
   }
   
   // Title screen function
@@ -78,19 +89,38 @@ class Game {
   
   // Update game stats
   void update() {
+    if (isLevel) {
+      for (int i = 0; i < sushis.length; i++) {
+        sushis[i].update();
+        if (sushis[i].pos.y > 100) {
+          sushis[i] = new Sushi();
+        }
+      }
+      for (int i = 0; i < bombs.length; i++) {
+        bombs[i].update();
+        if (bombs[i].pos.y > 100) {
+          bombs[i] = new Bomb();
+        }
+      }
+    }
+  }
+  
+  // Display current screen
+  void display() {
     if (isTitle) {
       titleScreen();
     }
     else if (isLevel) {
       levelScreen();
+      for (int i = 0; i < sushis.length; i++) {
+        sushis[i].display();
+      }
+      for (int i = 0; i < bombs.length; i++) {
+        bombs[i].display();
+      }
     }
     else if (isEnd) {
       endScreen();
     }
-  }
-  
-  // Display visuals
-  void display() {
-    
   }
 }

@@ -1,29 +1,27 @@
 // Sushi Rush by Nicole Ajoy
 
-// Import libraries (please read documentation on where to install)
+// Import libraries (please read documentation.docx)
 import ddf.minim.*;
 import gifAnimation.*;
 
-// Initalize objects
-PFont fontGameplay, fontRainy; // fonts
-Gif gifCat; // cute cat gif
-Paw paw; // cursor
-Game game; // game
-Minim minim; // audio
-Audio audio; // audio
+// Create objects
+PFont fontGameplay, fontRainy;
+Gif gifCat;
+Paw paw;
+Game game;
+Minim minim;
+Audio audio;
 
 // Setup for initalizing new objects
 void setup() {
   size(1000, 1000);
+
+  // Initialize objects
   fontGameplay = createFont("font_gameplay.ttf", 100);
   fontRainy = createFont("font_rainyhearts.ttf", 100);
   gifCat = new Gif(this, "image_cat.gif");
-  
-  // Game objects
   paw = new Paw();
   game = new Game();
-  
-  // Audio objects
   minim = new Minim(this);
   audio = new Audio();
   
@@ -68,4 +66,8 @@ void mousePressed() {
       game.isLevel = false; // turn on level background UI
     }
   }
+}
+
+void mouseDragged() {
+  
 }
