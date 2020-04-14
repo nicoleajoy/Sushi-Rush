@@ -4,10 +4,12 @@ class Game {
   // Variables
   int currentScore, highScore; // score counter
   PImage imgTitle, imgLevel, imgEnd; // background images
+  PImage imgHealth; // three lives for health
   boolean isTitle, isLevel, isEnd; // screen type
   String difficulty; // "EASY" or "HARD"
   Sushi[] sushis; // sushi collection
   Bomb[] bombs; // bomb collection
+  int lives; // number of lives
   
   // Constructor
   Game() {
@@ -19,9 +21,11 @@ class Game {
     imgTitle = loadImage("bg_title.png");
     imgLevel = loadImage("bg_level.png");
     imgEnd = loadImage("bg_end.png");
+    imgHealth = loadImage("image_health.png");
     difficulty = "EASY";
     sushis = new Sushi[5];
     bombs = new Bomb[2];
+    lives = 3;
 
     for (int i = 0; i < sushis.length; i++) {
       sushis[i] = new Sushi();
@@ -89,6 +93,18 @@ class Game {
       fill(#FFC98C, 125); // orange color
       text("HIGH SCORE: " + game.highScore, width/2, 70);
     popMatrix();
+    
+    if (lives == 3) {
+      image(imgHealth, 775, 20);
+    }
+    else if (lives == 2) {
+      PImage imgTwo = imgHealth.get(0, 0, 134, 60); 
+      image(imgTwo, 775, 20); 
+    }
+    else if (lives == 1) {
+      PImage imgOne = imgHealth.get(0, 0, 67, 60); 
+      image(imgOne, 775, 20); 
+    }
   }
   
   // End screen function
@@ -103,6 +119,15 @@ class Game {
       textFont(fontGameplay);
       textSize(45);
       text("X", 50, 50);
+      // Game over text
+      textSize(75);
+      fill(#676767); // orange color
+      textAlign(CENTER, CENTER);
+      text("GAME OVER", width/2, 200);
+      fill(#676767, 175); // orange color
+      textSize(40);
+      text("CURRENT SCORE: " + game.currentScore, width/2, height/2-30);
+      text("HIGH SCORE: " + game.highScore, width/2, height/2+30);
     popMatrix();
   }
   
@@ -129,9 +154,14 @@ class Game {
           bombs[i] = new Bomb();
         }
         bombs[i].checkCollision();
-        if (bombs[i].isCut) {
-          isEnd = true;
+        if (bombs[i].isCut && !bombs[i].isCounted) {
+          lives--;
+          bombs[i].isCounted = true;
         }
+      }
+      // Check number of lives
+      if (lives <= 0) {
+        isEnd = true;
       }
     }
   }
@@ -157,12 +187,23 @@ class Game {
   
   // Reset sushis, bombs, and current score before every START
   void reset() {
+    // Reset sushi and bomb spawns
     for (int i = 0; i < sushis.length; i++) {
       sushis[i] = new Sushi();
     }
     for (int i = 0; i < bombs.length; i++) {
       bombs[i] = new Bomb();
     }
+    
+    // Reset current score (but keep high score)
     currentScore = 0;
+    
+    // Easy = 3 lives | Hard = 1 life
+    if (difficulty == "EASY") {
+      lives = 3;
+    }
+    else if (difficulty == "HARD") {
+      lives = 1;
+    }
   }
 }

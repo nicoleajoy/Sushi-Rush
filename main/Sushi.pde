@@ -2,12 +2,12 @@
 
 class Sushi {
   // Variables
-  PImage img, imgCut; // sushi image representation
+  PImage img, imgCut; // sushi image representation (uncut and cut)
   PVector pos, vel, acc; // physics data
   int size; // for collision detection
   int value; // positive to add points to total
   boolean isCut; // to display sushi cut in half
-  boolean isCounted; // prevent double points from being added
+  boolean isCounted; // ensures value is counted once
   
   // Constructor
   Sushi() {
@@ -15,7 +15,7 @@ class Sushi {
     img = loadImage("image_sushi" + randomImgNum + ".png");
     imgCut = loadImage("image_sushi" + randomImgNum + "_CUT.png");
     pos = new PVector(0, 50);
-    vel = new PVector(random(5,10), random(-30, -20));
+    vel = new PVector(random(5,13), random(-30,-20));
     acc = new PVector(0, 9.81);
     size = 20;
     value = 10;
@@ -42,7 +42,7 @@ class Sushi {
       vel.y += acc.y*dt;
     }
     else if (game.difficulty == "HARD") {
-      float dt = 3.0/frameRate;
+      float dt = 3.25/frameRate;
       pos.x += vel.x*dt + acc.x*dt*dt/2;
       pos.y += vel.y*dt + acc.y*dt*dt/2;
       vel.x += acc.x*dt;

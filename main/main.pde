@@ -106,7 +106,7 @@ void mouseDragged() {
     }
     for (int i = 0; i < game.bombs.length; i++) {
         game.bombs[i].checkCollision();
-      if (game.bombs[i].isCut) {
+      if (game.lives <= 0) {
         game.isEnd = true;
         game.isLevel = false;
         game.isTitle = false;
