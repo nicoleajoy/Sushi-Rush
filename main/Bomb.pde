@@ -18,14 +18,33 @@ class Bomb {
     value = -5;
     isCut = false;
   }
+
+  void checkCollision() {
+    if (mousePressed) {
+      boolean xCheck = pos.x*10 <= mouseX && mouseX <= pos.x*10+img.width;
+      boolean yCheck = pos.y*10 <= mouseY && mouseY <= pos.y*10+img.height;
+      if (xCheck && yCheck) {
+        isCut = true;
+      }
+    }
+  }
   
   // Update physics
   void update() {
-    float dt = 1.0/frameRate;
-    pos.x += vel.x*dt + acc.x*dt*dt/2;
-    pos.y += vel.y*dt + acc.y*dt*dt/2;
-    vel.x += acc.x*dt;
-    vel.y += acc.y*dt;
+    if (game.difficulty == "EASY") {
+      float dt = 2.0/frameRate;
+      pos.x += vel.x*dt + acc.x*dt*dt/2;
+      pos.y += vel.y*dt + acc.y*dt*dt/2;
+      vel.x += acc.x*dt;
+      vel.y += acc.y*dt;
+    }
+    else if (game.difficulty == "HARD") {
+      float dt = 3.0/frameRate;
+      pos.x += vel.x*dt + acc.x*dt*dt/2;
+      pos.y += vel.y*dt + acc.y*dt*dt/2;
+      vel.x += acc.x*dt;
+      vel.y += acc.y*dt;
+    }
   }
   
   // Display bomb
