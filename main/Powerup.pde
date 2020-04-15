@@ -4,8 +4,8 @@
 
 class Powerup {
   // Variables
-  PImage imgIce, imgStar; // bomb image representation
-  boolean isIce, isStar; // determine which is true
+  PImage imgIce, imgStar; // powerup image representation
+  boolean isIce, isStar; // determine which powerup
   PVector pos, vel, acc; // phsyics data
   boolean isCut; // what to display when cut
   boolean isCounted; // ensures is counted once
@@ -80,7 +80,7 @@ class Powerup {
     }
   }
 
-  // Display sushi
+  // Display powerup
   void display() {
     if (!isCut) {
       if (isIce)
