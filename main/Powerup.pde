@@ -1,5 +1,0 @@
-// Nicole Ajoy
-
-class Powerup {
-  
-}
