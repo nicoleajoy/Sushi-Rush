@@ -34,6 +34,7 @@ class Sushi {
   
   // Update physics
   void update() {
+    // If easy mode, keep things chill
     if (game.difficulty == "EASY") {
       float dt = 2.0/frameRate;
       pos.x += vel.x*dt + acc.x*dt*dt/2;
@@ -41,6 +42,7 @@ class Sushi {
       vel.x += acc.x*dt;
       vel.y += acc.y*dt;
     }
+    // If hard mode, increase speed of objects
     else if (game.difficulty == "HARD") {
       float dt = 3.25/frameRate;
       pos.x += vel.x*dt + acc.x*dt*dt/2;

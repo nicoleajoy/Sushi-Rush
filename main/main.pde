@@ -92,27 +92,28 @@ void mousePressed() {
 // to new mouse position and released
 void mouseDragged() {
   if (game.isLevel) {
-    pushMatrix();
-      strokeWeight(10);
-      stroke(#F1CDBE);
-      line(paw.oldPos.x, paw.oldPos.y, mouseX, mouseY);
-      strokeWeight(1);
-      noStroke();
-    popMatrix();
+    strokeWeight(10);
+    stroke(#F1CDBE);
+    line(paw.oldPos.x, paw.oldPos.y, mouseX, mouseY);
+    strokeWeight(1);
+    noStroke();
     
     // Check if mouse touched the sushi/bomb
-    for (int i = 0; i < game.sushis.length; i++) {
-      game.sushis[i].checkCollision();
-    }
-    for (int i = 0; i < game.bombs.length; i++) {
+    if (game.timer.begin()) {
+      for (int i = 0; i < game.sushis.length; i++) {
+        game.sushis[i].checkCollision();
+      }
+      for (int i = 0; i < game.bombs.length; i++) {
         game.bombs[i].checkCollision();
-      if (game.lives <= 0) {
-        game.isEnd = true;
-        game.isLevel = false;
-        game.isTitle = false;
+        if (game.lives <= 0) {
+          game.isEnd = true;
+          game.isLevel = false;
+          game.isTitle = false;
+        }
       }
     }
   }
   
-  audio.playChopSound(); // play sound once when mouse released
+  // Play sound once when mouse released
+  audio.playChopSound(); 
 }
