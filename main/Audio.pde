@@ -1,8 +1,12 @@
 // Nicole Ajoy
 
+/************************** GLOBAL **************************/
 // Global variables
+
 AudioPlayer audioBg;
 AudioPlayer audioChop;
+
+/************************** AUDIO CLASS **************************/
 
 class Audio {
   // Constructor
@@ -23,7 +27,9 @@ class Audio {
   }
 }
 
-// Needed to close cleanly (no crash or corrupted files)
+/************************** STOP **************************/
+// Close the program safely (no crash or corrupted files)
+
 void stop() {
   audioBg.close();
   minim.stop();

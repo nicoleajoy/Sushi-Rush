@@ -1,5 +1,7 @@
 // Nicole Ajoy
 
+/************************** SUSHI CLASS **************************/
+
 class Sushi {
   // Variables
   PImage img, imgCut; // sushi image representation (uncut and cut)
@@ -23,6 +25,7 @@ class Sushi {
     isCounted = false;
   }
 
+  // Check mouse collision
   void checkCollision() {
     if (mousePressed) {
       boolean xCheck = pos.x*10 <= mouseX && mouseX <= pos.x*10+img.width;

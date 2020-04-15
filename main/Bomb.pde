@@ -1,5 +1,7 @@
 // Nicole Ajoy
 
+/************************** BOMB CLASS **************************/
+
 class Bomb {
   // Variables
   PImage img; // bomb image representation
@@ -20,7 +22,8 @@ class Bomb {
     isCut = false;
     isCounted = false;
   }
-
+  
+  // Check mouse collision
   void checkCollision() {
     if (mousePressed) {
       boolean xCheck = pos.x*10 <= mouseX && mouseX <= pos.x*10+img.width;
@@ -31,7 +34,7 @@ class Bomb {
     }
   }
   
-  // Update physics
+  // Update physics based on difficulty
   void update() {
     if (game.difficulty == "EASY") {
       float dt = 2.0/frameRate;

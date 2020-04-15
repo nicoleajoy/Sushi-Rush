@@ -1,5 +1,7 @@
 // Nicole Ajoy
 
+/************************** GAME CLASS **************************/
+
 class Game {
   // Variables
   int currentScore, highScore, lives; // scoreboard and health
@@ -11,38 +13,31 @@ class Game {
   Bomb[] bombs; // bomb collection
   Timer timer; // timer
   
-  
   // Constructor
   Game() {
     currentScore = 0;
     highScore = 0;
     lives = 3;
-    
     isTitle = true;
     isLevel = false;
     isEnd = false;
     difficulty = "EASY";
-    
     imgTitle = loadImage("bg_title.png");
     imgLevel = loadImage("bg_level.png");
     imgEnd = loadImage("bg_end.png");
     imgHealth = loadImage("image_health.png");
-    
     sushis = new Sushi[5];
     bombs = new Bomb[2];
-    
     for (int i = 0; i < sushis.length; i++) {
       sushis[i] = new Sushi();
     }
     for (int i = 0; i < bombs.length; i++) {
       bombs[i] = new Bomb();
     }
-    
     timer = new Timer();
   }
   
-  
-  // Title screen function
+  // Title screen UI
   void titleScreen() {
     background(imgTitle);
     noStroke();
@@ -83,7 +78,7 @@ class Game {
     text("QUIT", 800, 900);
   }
   
-  
+  // Level screen UI
   void levelScreen() {
     background(imgLevel);
     
@@ -106,7 +101,7 @@ class Game {
     
     // Timer: ready -> set -> go
     textSize(50);
-    fill(#FFC98C); // orange color
+    fill(#E3AD7E); // orange color
     if (timer.counter == 3) {
       text("READY?", width/2, height/2);
     }
@@ -131,8 +126,7 @@ class Game {
     }
   }
   
-  
-  // End screen function
+  // End screen UI
   void endScreen() {
     background(imgEnd);
     
@@ -155,7 +149,6 @@ class Game {
     text("CURRENT SCORE: " + game.currentScore, width/2, height/2-30);
     text("HIGH SCORE: " + game.highScore, width/2, height/2+30);
   }
-  
   
   // Update game stats
   void update() {
@@ -200,7 +193,6 @@ class Game {
     }
   }
   
-  
   // Display current screen
   void display() {
     if (isTitle && !isLevel && !isEnd) {
@@ -222,17 +214,8 @@ class Game {
     }
   }
   
-  
-  // Reset sushis, bombs, and current score before every START
+  // Reset values every "START" button click
   void reset() {
-    // Reset sushi and bomb spawns
-    for (int i = 0; i < sushis.length; i++) {
-      sushis[i] = new Sushi();
-    }
-    for (int i = 0; i < bombs.length; i++) {
-      bombs[i] = new Bomb();
-    }
-    
     // Reset current score (but keep high score)
     currentScore = 0;
     
@@ -242,6 +225,14 @@ class Game {
     }
     else if (difficulty == "HARD") {
       lives = 1;
+    }
+    
+    // Reset sushi and bomb spawns
+    for (int i = 0; i < sushis.length; i++) {
+      sushis[i] = new Sushi();
+    }
+    for (int i = 0; i < bombs.length; i++) {
+      bombs[i] = new Bomb();
     }
     
     timer.reset();

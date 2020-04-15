@@ -1,5 +1,7 @@
 // Nicole Ajoy
 
+/************************** PAW CLASS **************************/
+
 class Paw {
   // Variables
   PImage img; // paw image representation

@@ -1,10 +1,14 @@
 // Sushi Rush by Nicole Ajoy
 
-// Import libraries (please read documentation.docx)
+/************************** IMPORTS **************************/
+// Import libraries (documentation.docx for install guide)
+
 import ddf.minim.*;
 import gifAnimation.*;
 
-// Create objects
+/************************** GLOBAL **************************/
+// Create global objects
+
 PFont fontGameplay, fontRainy;
 Gif gifCat;
 Paw paw;
@@ -12,7 +16,9 @@ Game game;
 Minim minim;
 Audio audio;
 
-// Setup for initalizing new objects
+/************************** SETUP **************************/
+// Initalize global objects, start bg music, play gifs
+
 void setup() {
   size(1000, 1000);
   
@@ -25,20 +31,25 @@ void setup() {
   minim = new Minim(this);
   audio = new Audio();
   
-  // Play bg audio and animations
+  // Background music and gif animations
   audio.playBgMusic();
   gifCat.play();
 }
 
-// Update and display objects
+/************************** DRAW **************************/
+// Update and display objects every frame
+
 void draw() {
   paw.display();
   game.update();
   game.display();
 }
 
-// MousePressed (available all screens):
-// UI buttons for all screens
+/************************** MOUSEPRESSED **************************/
+// Used for:
+// - level selection in the title screen (mouse button clicks)
+// - tracking original mouse position for slice in level screen
+
 void mousePressed() {
   // Track old mouse position
   paw.oldPos.x = mouseX;
@@ -87,18 +98,22 @@ void mousePressed() {
   }
 }
 
-// MouseDragged (only available in level screen):
-// draw line from where mouse is originally clicked
-// to new mouse position and released
+/************************** MOUSEDRAGGED **************************/
+// Used for:
+// - draw line from original mouse click to release point (dragged)
+// - check if mouse position collides with sushi/bomb
+// - play chop sound once when released
+
 void mouseDragged() {
   if (game.isLevel) {
+    // Draw chop line
     strokeWeight(10);
     stroke(#F1CDBE);
     line(paw.oldPos.x, paw.oldPos.y, mouseX, mouseY);
     strokeWeight(1);
     noStroke();
     
-    // Check if mouse touched the sushi/bomb
+    // Check collision
     if (game.timer.begin()) {
       for (int i = 0; i < game.sushis.length; i++) {
         game.sushis[i].checkCollision();
@@ -114,6 +129,6 @@ void mouseDragged() {
     }
   }
   
-  // Play sound once when mouse released
+  // Play chop sound
   audio.playChopSound(); 
 }
