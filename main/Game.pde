@@ -11,7 +11,9 @@ class Game {
   String difficulty; // "EASY" or "HARD"
   Sushi[] sushis; // sushi collection
   Bomb[] bombs; // bomb collection
-  Timer timer; // timer
+  Powerup[] powerups; // powerup collection
+  Timer rsgTimer, powerupTimer; // timers
+  boolean powerupActive; // ice powerup trigger
   
   // Constructor
   Game() {
@@ -28,13 +30,19 @@ class Game {
     imgHealth = loadImage("image_health.png");
     sushis = new Sushi[5];
     bombs = new Bomb[2];
+    powerups = new Powerup[1];
     for (int i = 0; i < sushis.length; i++) {
       sushis[i] = new Sushi();
     }
     for (int i = 0; i < bombs.length; i++) {
       bombs[i] = new Bomb();
     }
-    timer = new Timer();
+    for (int i = 0; i < powerups.length; i++) {
+      powerups[i] = new Powerup();
+    }
+    rsgTimer = new Timer();
+    powerupTimer = new Timer();
+    powerupActive = false;
   }
   
   // Title screen UI
@@ -100,15 +108,15 @@ class Game {
     text("HIGH SCORE: " + game.highScore, width/2, 70);
     
     // Timer: ready -> set -> go
-    textSize(50);
+    textSize(75);
     fill(#E3AD7E); // orange color
-    if (timer.counter == 3) {
+    if (rsgTimer.counter == 3) {
       text("READY?", width/2, height/2);
     }
-    if (timer.counter == 2) {
+    if (rsgTimer.counter == 2) {
       text("SET?", width/2, height/2);
     }
-    if (timer.counter == 1) {
+    if (rsgTimer.counter == 1) {
       text("GO!", width/2, height/2);
     }
     
@@ -153,8 +161,15 @@ class Game {
   // Update game stats
   void update() {
     if (isLevel) {
-      timer.update();
-      if (timer.begin()) {
+      rsgTimer.update();
+      if (powerupActive) {
+        powerupTimer.update();
+      }
+      else {
+        powerupActive = false;
+        powerupTimer.reset();
+      }
+      if (rsgTimer.isDone()) {
         // Check sushi collisions
         for (int i = 0; i < sushis.length; i++) {
           sushis[i].update();
@@ -165,9 +180,6 @@ class Game {
           if (sushis[i].isCut && !sushis[i].isCounted) {
             currentScore += sushis[i].value;
             sushis[i].isCounted = true;
-          }
-          if (currentScore >= highScore) {
-            highScore = currentScore;
           }
         }
         // Check bomb collisions
@@ -185,6 +197,30 @@ class Game {
             bombs[i].isCounted = true;
           }
         }
+        // Check powerup collisions
+        if (difficulty == "HARD") {
+          for (int i = 0; i < powerups.length; i++) {
+            powerups[i].update();
+            if (powerups[i].pos.y > 100) {
+              powerups[i] = new Powerup();
+            }
+            powerups[i].checkCollision();
+            if (powerups[i].isCut && !powerups[i].isCounted) {
+              if (powerups[i].isStar) {
+                currentScore += 50; // double sushi value
+                powerups[i].isCounted = true;
+              }
+              else if (powerups[i].isIce) {
+                powerupTimer = new Timer();
+                powerupActive = true;
+              }
+            }
+          }
+        }
+        // Save high score
+        if (currentScore >= highScore) {
+            highScore = currentScore;
+        }
         // Check number of lives
         if (lives <= 0) {
           isEnd = true;
@@ -200,9 +236,14 @@ class Game {
     }
     else if (isLevel && !isTitle && !isEnd) {
       levelScreen();
-      if (timer.begin()) {
+      if (rsgTimer.isDone()) {
         for (int i = 0; i < sushis.length; i++) {
           sushis[i].display();
+        }
+        if (difficulty == "HARD") {
+          for (int i = 0; i < powerups.length; i++) {
+            powerups[i].display();
+          }
         }
         for (int i = 0; i < bombs.length; i++) {
           bombs[i].display();
@@ -234,7 +275,13 @@ class Game {
     for (int i = 0; i < bombs.length; i++) {
       bombs[i] = new Bomb();
     }
+    if (difficulty == "HARD") {
+      for (int i = 0; i < powerups.length; i++) {
+        powerups[i] = new Powerup();
+      }
+    }
     
-    timer.reset();
+    powerupActive = false;
+    rsgTimer.reset();
   }
 }

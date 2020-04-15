@@ -6,7 +6,6 @@ class Sushi {
   // Variables
   PImage img, imgCut; // sushi image representation (uncut and cut)
   PVector pos, vel, acc; // physics data
-  int size; // for collision detection
   int value; // positive to add points to total
   boolean isCut; // to display sushi cut in half
   boolean isCounted; // ensures value is counted once
@@ -19,7 +18,6 @@ class Sushi {
     pos = new PVector(0, 50);
     vel = new PVector(random(5,13), random(-30,-20));
     acc = new PVector(0, 9.81);
-    size = 20;
     value = 10;
     isCut = false;
     isCounted = false;
@@ -47,11 +45,20 @@ class Sushi {
     }
     // If hard mode, increase speed of objects
     else if (game.difficulty == "HARD") {
-      float dt = 3.25/frameRate;
-      pos.x += vel.x*dt + acc.x*dt*dt/2;
-      pos.y += vel.y*dt + acc.y*dt*dt/2;
-      vel.x += acc.x*dt;
-      vel.y += acc.y*dt;
+      if (!game.powerupActive || game.powerupTimer.isDone()) {
+        float dt = 3.75/frameRate;
+        pos.x += vel.x*dt + acc.x*dt*dt/2;
+        pos.y += vel.y*dt + acc.y*dt*dt/2;
+        vel.x += acc.x*dt;
+        vel.y += acc.y*dt;
+      }
+      else {
+        float dt = 1.5/frameRate;
+        pos.x += vel.x*dt + acc.x*dt*dt/2;
+        pos.y += vel.y*dt + acc.y*dt*dt/2;
+        vel.x += acc.x*dt;
+        vel.y += acc.y*dt;
+      }
     }
   }
   
@@ -63,7 +70,7 @@ class Sushi {
     else {
       tint(255, 127); // half opacity
       image(imgCut, pos.x*10, pos.y*10);
-      tint(255, 255); // full opacity
+      tint(255, 255); // return full opacity for next reset
     }
   }
 }

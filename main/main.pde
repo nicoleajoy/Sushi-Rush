@@ -114,7 +114,7 @@ void mouseDragged() {
     noStroke();
     
     // Check collision
-    if (game.timer.begin()) {
+    if (game.rsgTimer.isDone()) {
       for (int i = 0; i < game.sushis.length; i++) {
         game.sushis[i].checkCollision();
       }

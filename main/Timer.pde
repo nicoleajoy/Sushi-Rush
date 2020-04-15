@@ -15,15 +15,23 @@ class Timer {
   
   // Update current time and reduce counter
   void update() {
-    // Wait two seconds every counter increment
-    if ((millis() > currentTime+2000) && (counter > 0)) {
-      currentTime = millis();
-      counter--;
+    // Wait two seconds every counter decrement
+    if (!game.powerupActive) {
+      if ((millis() > currentTime+2000) && (counter > 0)) {
+        currentTime = millis();
+        counter--;
+      }
+    }
+    else {
+      if ((millis() > currentTime+1000) && (counter > 0)) {
+        currentTime = millis();
+        counter--;
+      }
     }
   }
-  
+
   // Check whether or not to display ready-set-go words
-  boolean begin() {
+  boolean isDone() {
     if (counter == 0) {
       return true;
     }
@@ -32,6 +40,7 @@ class Timer {
   
   // Called every "START" button click
   void reset() {
+    currentTime = millis();
     counter = 3;
   }
 }
