@@ -4,12 +4,11 @@ Hello! Thank you for downloading my game, Sushi Rush! This game currently runs o
 ## Library Imports
 Before running the game, please make sure to download the libraries as they are imported into the program. They are necessary to properly run the game and to visualize everything.
 
-[GifAnimation](https://github.com/extrapixel/gif-animation)
-1. Download and unzip the “gifAnimation.zip” folder
+### GifAnimation
+1. [Download](https://github.com/extrapixel/gif-animation) the library and unzip the “gifAnimation.zip” folder
 2. put the extracted folder in the following directory: `<PathToProcessingSketchFolder>/libraries`
-
-[Minim](http://www.cs.cmu.edu/~jar/cn21.pdf)
-1. Download from Processing > Sketch > Add Library > “Minim”
+### Minim
+1. [Download](http://www.cs.cmu.edu/~jar/cn21.pdf) from Processing > Sketch > Add Library > “Minim”
 
 ## Game Description
 ### Overview
