@@ -4,12 +4,12 @@
 Hey there! Thanks for check out my game, Sushi Rush. This game currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions). Check out the demo video for it [here](https://youtu.be/g7SrBz3Ejmc)!
 
 ## Library Imports
-Before running the game, please make sure to download the libraries as they are imported into the program. They are necessary to properly run the game.
+Before running the game, please make sure to download the following libraries. They are imported into the program and are absolutely necessary to visualize everything!
 ### GifAnimation
-1. [Download](https://github.com/extrapixel/gif-animation) the library and unzip the “gifAnimation.zip” folder
-2. put the extracted folder in the following directory: `<PathToProcessingSketchFolder>/libraries`
+1. [Download](https://github.com/extrapixel/gif-animation) the library and unzip the “gifAnimation.zip” folder.
+2. Put the extracted folder in the following directory: `<PathToProcessingSketchFolder>/libraries`.
 ### Minim
-1. [Download](http://www.cs.cmu.edu/~jar/cn21.pdf) from Processing > Sketch > Add Library > “Minim”
+1. [Download](http://www.cs.cmu.edu/~jar/cn21.pdf) from Processing > Sketch > Add Library > “Minim”.
 
 ## Game Description
 ### Overview
@@ -36,5 +36,3 @@ This screen is obtained only when all lives are lost. Simply click the X button 
 I spent quite a decent amount of time on the screen layouts and tracking which screen (Title, Level, End) is active. I remembered a wise saying from one of my programming fundamentals professors: “If you are stuck, chances are you need to add another variable.” Surely, after adding a few more Boolean variables and if-else statements, I was able to solve all my problems. 
 ### SPECIAL PROCESSING FUNCTIONS
 Another difficulty I encountered was dealing with the mousePressed() and mouseDragged() functions when it came to button clicks and actual gameplay mechanics (mouse dragging/holding). My original implementation involved using the mouseClicked Boolean variable. The issue with this is that when I used it, it would count all the frames that the mouse was held, and my program would either keep adding values to the total score multiple times, or it would take away all the health/lives with just one bomb collision. To fix this, I changed the implementation to include mousePressed() and mouseDragged() functions and rearranged several lines of code.
-
-## Credits
