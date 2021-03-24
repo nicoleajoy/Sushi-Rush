@@ -1,4 +1,4 @@
-![Sushi-Rush](https://github.com/nicoleajoy/Sushi-Rush/blob/master/main/data/images_github_icon.JPG?raw=true)
+![Sushi-Rush](https://github.com/nicoleajoy/Sushi-Rush/blob/master/main/data/images_github_icon.png?raw=true)
 
 # Sushi Rush
 Hey there! Thanks for check out my game, Sushi Rush. This game currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions). Check out the demo video for it [here](https://youtu.be/g7SrBz3Ejmc)!
