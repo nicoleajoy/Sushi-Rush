@@ -1,7 +1,7 @@
 ![Sushi-Rush](https://github.com/nicoleajoy/Sushi-Rush/blob/master/main/data/images_github_icon.JPG?raw=true)
 
 # Sushi Rush
-Hello! Thank you for downloading my game, Sushi Rush! This game currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions).
+Hello! Thank you for downloading my game, Sushi Rush! This game currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions). Check out the demo video for it [here](https://youtu.be/g7SrBz3Ejmc).
 
 ## Library Imports
 Before running the game, please make sure to download the libraries as they are imported into the program. They are necessary to properly run the game and to visualize everything.
