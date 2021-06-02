@@ -1,23 +1,23 @@
 ![Sushi-Rush](https://github.com/nicoleajoy/Sushi-Rush/blob/master/main/data/images_github_icon.png?raw=true)
 
-# Sushi Rush
-Hey there! Thanks for check out my game, Sushi Rush. This game currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions). Check out the demo video for it [here](https://youtu.be/g7SrBz3Ejmc)!
+# About
+Sushi Rush currently runs on Processing version 3.x (library imports should work on any Processing 3.x versions).
 
 ## Library Imports
-Before running the game, please make sure to download the following libraries. They are imported into the program and are absolutely necessary to visualize everything!
+Please download the following libraries, as they are necessary to visualize everything.
 ### GifAnimation
 1. [Download](https://github.com/extrapixel/gif-animation) the library and unzip the “gifAnimation.zip” folder.
 2. Put the extracted folder in the following directory: `<PathToProcessingSketchFolder>/libraries`.
 ### Minim
 1. [Download](http://www.cs.cmu.edu/~jar/cn21.pdf) from Processing > Sketch > Add Library > “Minim”.
 
-## Game Description
+## Description
 ### Overview
 The genre of Sushi Rush is arcade/strategy game that follows the general game mechanics of the popular game, Fruit Ninja.
 ### Objective
 The objective is to slice down as many pieces of sushi as possible, collecting enough points while avoiding bombs, to eventually beat the high score.
 
-## UI/Controls & Gameplay
+## Interface, Controls, & Gameplay
 ### TITLE SCREEN
 There is currently one level implemented that can be set to an EASY or HARD difficulty from the title screen. By default, the level is set to EASY. Once the user is satisfied with the difficulty setting, they can select the START button to start the game (GAMEPLAY SCREEN). The user can exit the program by clicking on the QUIT button on the title screen. Likewise, the program can be terminated at any point by pressing the ESC key.
 ### GAMEPLAY SCREEN 
